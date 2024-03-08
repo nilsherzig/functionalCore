@@ -19,9 +19,7 @@ var _ = Describe("Core", func() {
 			{Name: "Jane", IsReady: false},
 		}
 
-		members = fc.Members.New(
-			fc.Members{},
-			memberSlice)
+		members = fc.New(memberSlice)
 	})
 
 	It("should return a new Members object", func() {
@@ -30,16 +28,16 @@ var _ = Describe("Core", func() {
 	})
 
 	It("should filter ready members", func() {
-		Expect(len(members.ReadyMembers().Items)).
+		Expect(len(fc.ReadyMembers(members).Items)).
 			To(Equal(1))
-		Expect(members.ReadyMembers().Items).
+		Expect(fc.ReadyMembers(members).Items).
 			To(Equal([]fc.Member{{Name: "John", IsReady: true}}))
 	})
 
 	It("should add a new member", func() {
 		newMember := fc.Member{Name: "Jack", IsReady: true}
 
-		Expect(members.AddMember(newMember.Name, newMember.IsReady).Items).
+		Expect(fc.AddMember(members, newMember.Name, newMember.IsReady).Items).
 			To(Equal(append(memberSlice, newMember)))
 	})
 })

@@ -19,14 +19,14 @@ func imperativeShell() {
 	members := fc.Members{}
 
 	// adding two members
-	members = members.AddMember("John", true)
-	members = members.AddMember("Doe", false)
+	members = fc.AddMember(members, "John", true)
+	members = fc.AddMember(members, "Doe", false)
 
 	// print current members
 	fmt.Println(members)
 
 	// filter map for only ready members
-	members = members.ReadyMembers()
+	members = fc.ReadyMembers(members)
 
 	// print filtered members
 	fmt.Println(members)
